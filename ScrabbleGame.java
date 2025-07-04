@@ -13,8 +13,29 @@ import java.io.FileNotFoundException;
 //*************************************DEFINING METHODS************************************
 public class ScrabbleGame {
 
-    private static boolean validLetters(char[] randomLetters, String userWord) {
-        // Check if userWord uses only the given letters
+// Checks if any word in the dictionary can be formed from the given letters
+private static boolean canFormAnyWord(char[] randomLetters, ArrayList<Word> words) {
+    int[] letterCount = new int[26];
+    for (char c : randomLetters) letterCount[c - 'A']++;
+    for (Word w : words) {
+        String word = w.toString().toUpperCase();
+        int[] tempCount = letterCount.clone();
+        boolean canForm = true;
+        for (char c : word.toCharArray()) {
+            if (c < 'A' || c > 'Z' || tempCount[c - 'A'] == 0) {
+                canForm = false;
+                break;
+            }
+            tempCount[c - 'A']--;
+        }
+        if (canForm) return true;
+    }
+    return false;
+    
+}
+
+// Checks if the user word is valid using only the letters provided
+private static boolean validLetters(char[] randomLetters, String userWord) {
         int[] letterCount = new int[26];
         for (char c : randomLetters) letterCount[c - 'A']++;
         for (char c : userWord.toCharArray()) {
@@ -25,23 +46,26 @@ public class ScrabbleGame {
         }
         return true;
     }
-
-    private static String gitUSER(char[] randomLetters){
+    
+    // Prompts the user to enter a word using the random letters
+    // Pass scanner as parameter
+    private static String gitUSER(char[] randomLetters, Scanner input){
         while(true) {
-            //Display the random letters
             System.out.print("Your letters are: ");
             for (char c : randomLetters) System.out.print(c + " ");
             System.out.println();
 
-            // Ask user for a word
-            Scanner input = new Scanner(System.in);
             System.out.print("Enter a word using these letters: ");
             String userWord = input.nextLine().trim().toUpperCase();
 
-            // Check if the word uses only the given letters
+            if (userWord.isEmpty()) {
+                System.out.println("Invalid word: cannot be empty.");
+                continue;
+            }
+
             if (!validLetters(randomLetters, userWord)) {
                 System.out.println("Invalid word: uses letters not in the set.");
-                continue; // Ask again
+                continue;
             } else {
                 return userWord;
             }
@@ -79,24 +103,22 @@ public class ScrabbleGame {
         // This loop will run until the user decides to exit
 
         Scanner roundScan = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         boolean continueGame = true;
         while (continueGame) {
-            System.out.println("Do you wish to continue playing? (yes/no)");
-            String round = roundScan.nextLine().trim().toLowerCase();
-            if (!round.equals("yes")) {
-                break;
-            }
             //*************************************RANDOM LETTERS*************************************
             // Pick 4 random letters from the alphabet
             String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             Random rand = new Random();
             char[] randomLetters = new char[4];
-            for (int i = 0; i < 4; i++) {
-                randomLetters[i] = alphabet.charAt(rand.nextInt(alphabet.length()));
-            }
+            do {
+                for (int i = 0; i < 4; i++) {
+                    randomLetters[i] = alphabet.charAt(rand.nextInt(alphabet.length()));
+                }
+            } while (!canFormAnyWord(randomLetters, words));
 
             //************************************* CALL USER INPUT*************************************
-            String userWord = ScrabbleGame.gitUSER(randomLetters);
+            String userWord = ScrabbleGame.gitUSER(randomLetters, input);
 
             //*************************************BINARY SEARCH*************************************
             // Binary search for the word
@@ -105,6 +127,13 @@ public class ScrabbleGame {
                 System.out.println("Valid word: " + userWord);
             } else {
                 System.out.println("Not a valid word.");
+            }
+
+            // Ask to continue at the end of the round
+            System.out.println("Do you wish to continue playing? (yes/no)");
+            String round = input.nextLine().trim().toLowerCase();
+            if (!round.equals("yes")) {
+                continueGame = false;
             }
         }
         // End of the game
