@@ -4,9 +4,9 @@
 
 //*************************************IMPORTS*************************************
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.Collections;
 import java.util.Random;
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -17,14 +17,14 @@ public class ScrabbleGame {
     public static void main(String[] args) {
         ArrayList<Word> words = new ArrayList<>();
         try {
-            Scanner fileScanner = new Scanner(new File("CollinsScrabbleWords_2019.txt"));
-            while (fileScanner.hasNextLine()) {
-                String line = fileScanner.nextLine().trim();
+            Scanner collinsScanner = new Scanner(new File("CollinsScrabbleWords_2019.txt"));
+            while (collinsScanner.hasNextLine()) {
+                String line = collinsScanner.nextLine().trim();
                 if (!line.isEmpty()) {
                     words.add(new Word(line));
                 }
             }
-            fileScanner.close();
+            collinsScanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("Word list file not found.");
             return;
@@ -42,12 +42,16 @@ public class ScrabbleGame {
         
         //*************************************USER INPUT*************************************
         //Introductory message
+        System.out.println("*************************************START OF SCRABBLE*************************************");
         System.out.println("Welcome to the Scrabble Game!");
+
         //Display the random letters
         System.out.print("Your letters are: ");
         for (char c : randomLetters) System.out.print(c + " ");
         System.out.println();
 
+
+        //*************************************VALID WORD CHECK*************************************
         // Ask user for a word
         Scanner input = new Scanner(System.in);
         System.out.print("Enter a word using these letters: ");
@@ -70,6 +74,7 @@ public class ScrabbleGame {
             return;
         }
 
+        //*************************************BINARY SEARCH*************************************
         // Binary search for the word
         int idx = Collections.binarySearch(words, new Word(userWord));
         if (idx >= 0) {
