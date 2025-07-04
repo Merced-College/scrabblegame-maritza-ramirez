@@ -1,9 +1,6 @@
 //Name: Maritza Ramirez
 //Date: July 1, 2025
 
-import java.util.Collections;
-import java.io.File;
-import java.io.FileNotFoundException;
 
 public class Word implements Comparable<Word> {
     private String word;
