@@ -26,3 +26,15 @@ TODO Turn in: Turn in your 2 files (The Word and ScrabbleGame java files) to the
 TODO: Each student must respond to the reflection question individually, providing a unique answer. This part of the assignment should not be done collaboratively. Submit your reflection as a document either on Canvas or in the GitHub repository.
 
 Reflect on your personal problem-solving process. How did your understanding of object-oriented programming (e.g., classes, constructors, and data structures like ArrayLists) evolve as you worked on this task? What challenges did you encounter and how did you go about fixing them? Explain which LLM, your prompts, or internet help and how debugged your code?
+
+Maritza Ramirez 
+
+July 1, 2025 
+
+CPSC-39 
+
+Reflection 
+
+Question: Reflect on your personal problem-solving process. How did your understanding of object-oriented programming (e.g., classes, constructors, and data structures like Array Lists) evolve as you worked on this task? What challenges did you encounter and how did you go about fixing them? Explain which LLM, your prompts, or internet help and how debugged your code? 
+
+Answer: My personal problem-solving process is to look back at the chapters relating to what we need to accomplish in a program to help me. Although my main issue when starting a program is starting from scratch, sometimes, I do not know what to start at first. Before working on the task of creating a scrabble game I struggled with the understanding of object-oriented programming and still do a bit, but I was able to understand more each step of the way. I found myself having issues getting help from a git copilot. Also, during the programming process, I was not used to using git but through the assignment I learned the features. I do struggle with committing my progress every step of the way but still try my best including doing the messages that come with it. The help I had gotten was through code space in the GitHub copilot which helped me come up with ideas and how I can implement them. I used the debugger it came with in code spaces to ensure my program had no problems. Although just to ensure I asked the copilot to do a full run through to make sure there were no unnecessary lines.  
