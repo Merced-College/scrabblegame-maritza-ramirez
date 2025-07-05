@@ -2,9 +2,9 @@
 //Date: July 1, 2025
 //This program is a simple Scrabble game that gives the user random letters to form a word. 
 //First I added a looping system to allow the user to play multiple rounds until they choose to exit.
-//I also implemented a point system where the user can gain points for valid words and lose points for invalid words or letters used.
+//Second I added another level of verification to ensure the user does not get letters that cannot form any word in the dictionary.
+//Finally I implemented a point system where the user can gain points for valid words and lose points for invalid words or letters used.
 //There are different levels of scoring: Novice (10 points), Intermediate (25 points), and Expert (50 points).
-//I added another level of verification to ensure the user does not get letters that cannot form any word in the dictionary.
 
 
 //*************************************IMPORTS*************************************
